@@ -14,16 +14,19 @@ struct node{
             return new;/* data */
         }
     }
-    int search(struct node* head,int key)
-    {
+    struct node* insertatmid(struct node* head,int value,int pos){
+        struct node* newnode=createnode(value);
         struct node* temp=head;
-        while(temp!=NULL){
-            if(temp->data==key){
-                return 1;
-            }
-            temp=temp->next;
-        }return 0;
+        for(int i=1;i<pos-1&&temp!=NULL;i++){
+            temp=temp->next;}
+            newnode->next=temp->next;
+            temp->next=newnode;
+            
+           
+    
+        return head;
     }
+   
     void printlist(struct node* head)
     {
      struct node* temp=head;
@@ -35,18 +38,23 @@ struct node{
      
     }
     int main()
-    {
+    {   int pos,value;
+
         struct node* head=createnode(10);
         head->next=createnode(20);
         head->next->next=createnode(30);
         printlist(head);
-        int key=40;
-        if(search(head,key)){
-            printf("\n%d,element found",key);}
-            else{
-                printf("\nElement not found");
-            }
+       printf("\nEnter the position:");
+        scanf("%d",&pos);
+        printf("\nEnter the element:");
+      
+          scanf("%d",&value);
+          head=insertatmid(head,value,pos);
 
+        
+        
+        printf("\nAfter entering the data:");
+        printlist(head);
         
         return 0;
     }
