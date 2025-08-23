@@ -5,6 +5,7 @@ struct node{
     struct node* next;
         /* data */
     };struct node* head=NULL;
+    
     struct node* createnode(int value){
         struct node* new=(struct node*)malloc(sizeof(struct node));
         {
@@ -18,6 +19,16 @@ struct node{
         newnode->next=head;
         head=newnode;
         return newnode;
+    }
+    struct node* mergelist(struct node* head, struct node* head1)
+    {
+       struct node* temp=head;
+     while(temp->next!=NULL)
+     {
+        temp=temp->next;
+     }
+        temp->next=head1; 
+        return head;
     }
    
     void printlist(struct node* head)
@@ -36,19 +47,21 @@ struct node{
         struct node* head=createnode(10);
         head->next=createnode(20);
         head->next->next=createnode(30);
-        printlist(head);
-       printf("\nEnter the number of elements:");
-        scanf("%d",&n);
-        printf("\nEnter the elements:");
-        for(int i=0;i<n;i++){
-          scanf("%d",&value);
-          head=insertatbeg(head,value);
 
-        }
-        
-        printf("\nAfter entering the data:");
+        struct node* head1=createnode(40);
+        head1->next=createnode(50);
+        head1->next->next=createnode(60);
+
+       // head=insertatbeg(head,value);
+        printf("\nfirst list");
         printlist(head);
-        
+
+       // head1=insertatbeg(head1,value);
+        printf("\nsecond list");
+        printlist(head1);
+        head=mergelist(head,head1);
+        printf("\nafter merging");
+        printlist(head);
         return 0;
     }
     
