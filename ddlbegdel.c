@@ -15,19 +15,21 @@ struct node{
             return new;/* data */
         }
     }
-    struct node* insertatmid(struct node* head,int value,int pos){
+    struct node* insertatbeg(struct node* head,int value){
         struct node* newnode=createnode(value);
+        newnode->next=head;
+        head=newnode;
+        return newnode;
+    }
+     struct node* deleteatbeg(struct node* head){
+        int data;
         struct node* temp=head;
-        for(int i=1;i<pos&&temp->next!=NULL;i++){
-            temp=temp->next;}
-            struct node* temp1=temp->next;
-            newnode->next=temp1;
-            temp1->prev=newnode;
-            newnode->prev=temp;
-            temp->next=newnode;
-            
-           
-    
+        struct node* temp1=temp->next->next;
+        data=temp->next->data;
+        head=temp1;
+        temp1->prev=temp;
+        free(temp->next);
+        printf("\n%d removed from list",data);
         return head;
     }
    
@@ -42,22 +44,19 @@ struct node{
      
     }
     int main()
-    {   int pos,value;
+    {   int n,value;
 
         struct node* head=createnode(10);
         head->next=createnode(20);
         head->next->next=createnode(30);
         printlist(head);
-       printf("\nEnter the position:");
-        scanf("%d",&pos);
-        printf("\nEnter the element:");
-      
-          scanf("%d",&value);
-          head=insertatmid(head,value,pos);
-
+       
+       
+         
+          head=insertatbeg(head,value);
+        head=deleteatbeg(head);
         
-        
-        printf("\nAfter entering the data:");
+        printf("\nAfter deleting the data:");
         printlist(head);
         
         return 0;

@@ -15,19 +15,40 @@ struct node{
             return new;/* data */
         }
     }
-    struct node* insertatmid(struct node* head,int value,int pos){
+    struct node* insertatend(struct node* head,int value){
         struct node* newnode=createnode(value);
         struct node* temp=head;
-        for(int i=1;i<pos&&temp->next!=NULL;i++){
+        while(temp->next!=NULL){
             temp=temp->next;}
-            struct node* temp1=temp->next;
-            newnode->next=temp1;
-            temp1->prev=newnode;
-            newnode->prev=temp;
+
             temp->next=newnode;
-            
            
     
+        return head;
+    }
+    struct node* deleteatend(struct node* head){
+        int data;
+        if (head == NULL) {
+        printf("\nList is empty, nothing to remove");
+        return head;
+    }
+    if (head->next == NULL) {
+        data = head->data;
+        free(head);
+        printf("\n%d removed from the list", data);
+        return NULL;  // Now list is empty
+    }
+        struct node* temp=head;
+        while(temp->next->next!=NULL){
+            temp=temp->next;
+        }
+        struct node* temp1=temp->next;
+        data=temp1->data;
+        printf("Last node data before deletion: %d\n", temp->next->data);
+        free(temp1);
+        temp->next=NULL;
+        printf("\n%d removed from the list",data);
+        
         return head;
     }
    
@@ -42,22 +63,17 @@ struct node{
      
     }
     int main()
-    {   int pos,value;
+    {   int n;
 
         struct node* head=createnode(10);
         head->next=createnode(20);
         head->next->next=createnode(30);
         printlist(head);
-       printf("\nEnter the position:");
-        scanf("%d",&pos);
-        printf("\nEnter the element:");
-      
-          scanf("%d",&value);
-          head=insertatmid(head,value,pos);
+       
+          //head=insertatend(head,value);
 
-        
-        
-        printf("\nAfter entering the data:");
+        head=deleteatend(head);
+        printf("\nAfter removing the data:");
         printlist(head);
         
         return 0;
