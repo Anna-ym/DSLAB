@@ -28,27 +28,52 @@ struct node* insertatend(struct node* head, int value) {
     return head;
 }
 
-struct node* deleteatbeg(struct node* head) {
+struct node* deleteatpos(struct node* head, int pos) {
     if (head == NULL) {
-        printf("List is already empty.\n");
+        printf("List is empty.\n");
         return NULL;
     }
 
-    if (head->next == head) {
-        free(head);
-        return NULL;
-    }
-
+    // Count nodes
+    int count = 1;
     struct node* temp = head;
-    struct node* ptr = head;
-
-    while (ptr->next != head) {
-        ptr = ptr->next;
+    while (temp->next != head) {
+        count++;
+        temp = temp->next;
     }
 
-    head = head->next;
-    ptr->next = head;
-    free(temp);
+    if (pos < 1 || pos > count) {
+        printf("Invalid position.\n");
+        return head;
+    }
+
+    // Deleting the first node (position 1)
+    if (pos == 1) {
+        // If only one node
+        if (head->next == head) {
+            free(head);
+            return NULL;
+        }
+        // More than one node
+        struct node* last = head;
+        while (last->next != head)
+            last = last->next;
+        struct node* todelete = head;
+        head = head->next;
+        last->next = head;
+        free(todelete);
+        return head;
+    }
+
+    // Delete node other than first
+    struct node* current = head;
+    struct node* prev = NULL;
+    for (int i = 1; i < pos; i++) {
+        prev = current;
+        current = current->next;
+    }
+    prev->next = current->next;
+    free(current);
 
     return head;
 }
@@ -58,7 +83,6 @@ void printlist(struct node* head) {
         printf("List is empty.\n");
         return;
     }
-
     struct node* temp = head;
     do {
         printf("%d ", temp->data);
@@ -69,7 +93,7 @@ void printlist(struct node* head) {
 
 int main() {
     struct node* head = NULL;
-    int n, value;
+    int n, value, pos;
 
     printf("Enter the number of elements: ");
     scanf("%d", &n);
@@ -83,9 +107,11 @@ int main() {
     printf("Original list:\n");
     printlist(head);
 
-    head = deleteatbeg(head);
+    printf("Enter position to delete: ");
+    scanf("%d", &pos);
+    head = deleteatpos(head, pos);
 
-    printf("After deleting the first node:\n");
+    printf("After deleting node at position %d:\n", pos);
     printlist(head);
 
     return 0;

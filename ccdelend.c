@@ -28,26 +28,29 @@ struct node* insertatend(struct node* head, int value) {
     return head;
 }
 
-struct node* deleteatbeg(struct node* head) {
+struct node* deleteatend(struct node* head) {
     if (head == NULL) {
         printf("List is already empty.\n");
         return NULL;
     }
 
+    // Only one node
     if (head->next == head) {
         free(head);
         return NULL;
     }
 
     struct node* temp = head;
-    struct node* ptr = head;
+    struct node* prev = NULL;
 
-    while (ptr->next != head) {
-        ptr = ptr->next;
+    // Traverse to last node (where temp->next == head)
+    while (temp->next != head) {
+        prev = temp;
+        temp = temp->next;
     }
 
-    head = head->next;
-    ptr->next = head;
+    // 'temp' is last node, 'prev' is second last
+    prev->next = head;
     free(temp);
 
     return head;
@@ -58,7 +61,6 @@ void printlist(struct node* head) {
         printf("List is empty.\n");
         return;
     }
-
     struct node* temp = head;
     do {
         printf("%d ", temp->data);
@@ -83,9 +85,9 @@ int main() {
     printf("Original list:\n");
     printlist(head);
 
-    head = deleteatbeg(head);
+    head = deleteatend(head);
 
-    printf("After deleting the first node:\n");
+    printf("After deleting the last node:\n");
     printlist(head);
 
     return 0;
