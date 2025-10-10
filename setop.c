@@ -13,6 +13,11 @@ int main() {
     int Fset[50], Sset[50];
     int bitFset[100] = {0}; 
     int bitSset[100] = {0}; 
+    int Uoset[200] = {0};
+    int Ioset[200] = {0};
+    int Doset[200] = {0};
+    int C1oset[200] = {0};
+    int C2oset[200] = {0};
     int i, j, m, n, p;
 
   
@@ -94,6 +99,42 @@ int main() {
     printf("Bit String of Second Subset: ");
     for (i = 0; i < m; i++)
         printf("%d", bitSset[i]);
+    printf("\n");
+
+    for (i = 0; i < m; i++) 
+        Uoset[i] = bitFset[i] | bitSset[i];
+    for(i=0;i<m;i++)
+        Ioset[i] = bitFset[i] & bitSset[i];
+    for (i = 0; i < m; i++) 
+        Doset[i] = bitFset[i] & (!bitSset[i]);
+    for (i = 0; i < m; i++) 
+        C1oset[i] = !(bitFset[i]) ;
+    for (i = 0; i < m; i++) 
+        C2oset[i] = !(bitSset[i]) ;
+
+    printf("Union Operation: ");
+    for(i = 0; i < m; i++)
+        printf("%d", Uoset[i]);
+    printf("\n");
+
+    printf("Intersection Operation: ");
+    for(i = 0; i < m; i++)
+        printf("%d", Ioset[i]);
+    printf("\n");
+
+    printf("Relative difference Operation: ");
+    for(i = 0; i < m; i++)
+        printf("%d", Doset[i]);
+    printf("\n");
+
+    printf("Complement Operation on First Set: ");
+    for(i = 0; i < m; i++)
+        printf("%d", C1oset[i]);
+    printf("\n");
+
+    printf("Complement Operation on Second Set: ");
+    for(i = 0; i < m; i++)
+        printf("%d", C2oset[i]);
     printf("\n");
 
     return 0;
