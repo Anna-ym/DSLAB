@@ -16,6 +16,7 @@ int main() {
     int Uoset[200] = {0};
     int Ioset[200] = {0};
     int Doset[200] = {0};
+    int Soset[200] = {0};
     int C1oset[200] = {0};
     int C2oset[200] = {0};
     int i, j, m, n, p;
@@ -108,6 +109,8 @@ int main() {
     for (i = 0; i < m; i++) 
         Doset[i] = bitFset[i] & (!bitSset[i]);
     for (i = 0; i < m; i++) 
+        Soset[i] = (bitFset[i] & (!bitSset[i])) | (!bitFset[i] & (bitSset[i]));
+    for (i = 0; i < m; i++) 
         C1oset[i] = !(bitFset[i]) ;
     for (i = 0; i < m; i++) 
         C2oset[i] = !(bitSset[i]) ;
@@ -125,6 +128,11 @@ int main() {
     printf("Relative difference Operation: ");
     for(i = 0; i < m; i++)
         printf("%d", Doset[i]);
+    printf("\n");
+
+    printf("Symmetric difference Operation: ");
+    for(i = 0; i < m; i++)
+        printf("%d", Soset[i]);
     printf("\n");
 
     printf("Complement Operation on First Set: ");
