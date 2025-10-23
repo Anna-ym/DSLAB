@@ -38,11 +38,11 @@ struct Node* deleteNode(struct Node* root, int key) {
     if (root == NULL)
         return root;
 
-    if (key < root->data)
+    if (key < root->data)                   
         root->left = deleteNode(root->left, key);
     else if (key > root->data)
         root->right = deleteNode(root->right, key);
-    else {
+    else {                  
         
         if (root->left == NULL) {
             struct Node* temp = root->right;
