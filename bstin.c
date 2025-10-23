@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
 struct Node {
     int data;
     struct Node *left, *right;
@@ -36,37 +37,22 @@ void inorder(struct Node* root) {
     }
 }
 
-
-struct Node* search(struct Node* root, int key) {
-    if (root == NULL || root->data == key)
-        return root;
-
-    if (key < root->data)
-        return search(root->left, key);
-    else
-        return search(root->right, key);
-}
-
-
 int main() {
     struct Node* root = NULL;
+    int n, value;
 
-    root = insert(root, 50);
-    insert(root, 30);
-    insert(root, 70);
-    insert(root, 20);
-    insert(root, 40);
-    insert(root, 60);
-    insert(root, 80);
+    printf("How many numbers do you want to insert? ");
+    scanf("%d", &n);
 
-    printf("Inorder traversal: ");
+    printf("Enter %d numbers:\n", n);
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &value);
+        root = insert(root, value);
+    }
+
+    printf("\nInorder traversal (sorted order): ");
     inorder(root);
-
-    int key = 40;
-    if (search(root, key))
-        printf("\n%d found in the tree.\n", key);
-    else
-        printf("\n%d not found in the tree.\n", key);
+    printf("\n");
 
     return 0;
 }
