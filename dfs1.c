@@ -1,5 +1,4 @@
 #include <stdio.h>
-
 #define MAX 10
 
 int adj[MAX][MAX];
@@ -55,7 +54,7 @@ int main() {
         for (int j = 0; j < n; j++) {
             adj[i][j] = 0;
         }
-        visited[i] = 0;
+        visited[i]=0;
     }
 
     printf("Enter edges (u v):\n");
