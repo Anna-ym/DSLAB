@@ -50,25 +50,17 @@ void topologicalSort(int graph[MAX_V][MAX_V], int V) {
 int main() {
     int V, E, u, v;
 
-    printf("Enter number of vertices (max %d): ", MAX_V);
-    if (scanf("%d", &V) != 1 || V <= 0 || V > MAX_V) {
-        printf("Invalid number of vertices.\n");
-        return 1;
-    }
+    printf("Enter number of vertices : ");
+     scanf("%d", &V) ;
+    
 
     printf("Enter number of edges: ");
-    if (scanf("%d", &E) != 1 || E < 0) {
-        printf("Invalid number of edges.\n");
-        return 1;
-    }
+    scanf("%d", &E);
     int graph[MAX_V][MAX_V] = {0}; 
 
-    printf("Enter the edges (u v) where u is the start and v is the end vertex (0 to %d):\n", V - 1);
+    printf("Enter the edges (u v) where u is the start and v is the end vertex (starts with 0):\n");
     for (int i = 0; i < E; i++) {
-        if (scanf("%d %d", &u, &v) != 2 || u < 0 || u >= V || v < 0 || v >= V) {
-            printf("Invalid vertex number encountered. Exiting.\n");
-            return 1;
-        }
+        scanf("%d %d", &u, &v) ;
         graph[u][v] = 1;
     }
     topologicalSort(graph, V);
