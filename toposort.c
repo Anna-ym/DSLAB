@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h> 
 
-#define MAX_V 10 
+#define MAX_V 10
 
 
 void topologicalSort(int graph[MAX_V][MAX_V], int V) {
